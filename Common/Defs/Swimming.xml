@@ -10,7 +10,7 @@
     <defName>WIC_Swim</defName>
     <driverClass>WaterIsCold.JobDriver_Swim</driverClass>
     <reportString>swimming.</reportString>
-    <joyDuration>6000</joyDuration>
+    <joyDuration>5000</joyDuration>
     <joyKind>Hydrotherapy</joyKind>
     <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
   </JobDef>

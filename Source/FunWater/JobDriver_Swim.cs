@@ -18,26 +18,48 @@ namespace WaterIsCold
 
         protected override IEnumerable<Toil> MakeNewToils()
         {
+			this.FailOn(() => !JoyUtility.EnjoyableOutsideNow(pawn.Map, null));
+			this.FailOn(() => pawn.Map.mapTemperature.OutdoorTemp < 21f);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
-			Toil toil = new Toil();
-			toil.tickAction = delegate ()
+			Action swimTick = delegate ()
 			{
-				JoyUtility.JoyTickCheckEnd(this.pawn, JoyTickFullJoyAction.EndJob, 1f, null);
+				JoyUtility.JoyTickCheckEnd(this.pawn, JoyTickFullJoyAction.GoToNextToil, 1f, null);
 			};
-			toil.defaultCompleteMode = ToilCompleteMode.Delay;
-			toil.defaultDuration = this.job.def.joyDuration;
-			toil.FailOn(() => !this.pawn.Position.GetTerrain(this.pawn.Map).IsWater);
-			toil.FailOn(() => this.pawn.Position.GetTerrain(this.pawn.Map) == TerrainDef.Named("Marsh"));
-			toil.FailOn(() => this.pawn.Map.mapTemperature.OutdoorTemp < 21f);
-			toil.FailOn(() => !JoyUtility.EnjoyableOutsideNow(this.pawn.Map, null));
-			yield return toil;
+			Toil treadWaterToil = Toils_General.Wait(job.def.joyDuration / 3, TargetIndex.C);
+			treadWaterToil.tickAction = swimTick;
+
+			//Swim to first spot
+			Toil firstSwimToil = Toils_Goto.GotoCell(TargetIndex.B, PathEndMode.OnCell);
+			firstSwimToil.tickAction = swimTick;
+			firstSwimToil.FailOn(() => this.pawn.Position.GetTerrain(this.pawn.Map) == TerrainDef.Named("Marsh"));
+			yield return firstSwimToil;
+			yield return treadWaterToil;
+			//Swim to second spot
+			Toil secondSwimToil = Toils_Goto.GotoCell(TargetIndex.C, PathEndMode.OnCell);
+			secondSwimToil.tickAction = swimTick;
+			secondSwimToil.FailOn(() => this.pawn.Position.GetTerrain(this.pawn.Map) == TerrainDef.Named("Marsh"));
+			yield return secondSwimToil;
+			yield return treadWaterToil;
+			//Swim back to first spot
+			yield return firstSwimToil;
+			yield return treadWaterToil;
+			//Return to shore
+			Toil shoreReturnToil = Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
+			shoreReturnToil.tickAction = delegate ()
+			{
+				JoyUtility.JoyTickCheckEnd(this.pawn, JoyTickFullJoyAction.None, 1f, null);
+			};
+			yield return shoreReturnToil;
 			yield break;
 		}
-
 
         public override string GetReport()
 		{
 			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.Map);
+			if (!terrain.IsWater)
+            {
+				return "Going for a swim".Translate();
+            }
 			if(terrain == TerrainDefOf.WaterShallow || terrain == TerrainDefOf.WaterMovingShallow || terrain == TerrainDefOf.WaterOceanShallow)
 			{
 				return "Wading".Translate();
@@ -48,7 +70,7 @@ namespace WaterIsCold
             }
 			if (terrain == TerrainDefOf.WaterDeep)
             {
-				return "Floating".Translate();
+				return "Treading water".Translate();
             }
 			return "Swimming".Translate();
 		}
