@@ -8,7 +8,7 @@
     <hediffClass>HediffWithComps</hediffClass>
     <everCurableByItem>false</everCurableByItem>
     <isBad>false</isBad>
-		<initialSeverity>.25</initialSeverity>
+		<initialSeverity>.01</initialSeverity>
 		<maxSeverity>1</maxSeverity>
 		<defaultLabelColor>(0.8, 0.8, 1)</defaultLabelColor>
 		<comps>
@@ -21,7 +21,7 @@
 			<li>
 				<label>damp</label>
 				<statOffsets>
-					<ComfyTemperatureMin>4</ComfyTemperatureMin>
+					<ComfyTemperatureMin>5</ComfyTemperatureMin>
 					<ComfyTemperatureMax>4</ComfyTemperatureMax>
 				</statOffsets>
 			</li>
@@ -29,7 +29,7 @@
 				<minSeverity>.26</minSeverity>
 				<label>wet</label>
 				<statOffsets>
-					<ComfyTemperatureMin>8</ComfyTemperatureMin>
+					<ComfyTemperatureMin>5</ComfyTemperatureMin>
 					<ComfyTemperatureMax>8</ComfyTemperatureMax>
 				</statOffsets>
 			</li>
@@ -37,18 +37,16 @@
 				<minSeverity>.51</minSeverity>
 				<label>soaked</label>
 				<statOffsets>
-					<ComfyTemperatureMin>12</ComfyTemperatureMin>
+					<ComfyTemperatureMin>10</ComfyTemperatureMin>
 					<ComfyTemperatureMax>12</ComfyTemperatureMax>
-					<MoveSpeed>-0.04</MoveSpeed>
 				</statOffsets>
 			</li>
 			<li>
 				<minSeverity>.76</minSeverity>
 				<label>drenched</label>
 				<statOffsets>
-					<ComfyTemperatureMin>16</ComfyTemperatureMin>
+					<ComfyTemperatureMin>10</ComfyTemperatureMin>
 					<ComfyTemperatureMax>16</ComfyTemperatureMax>
-					<MoveSpeed>-0.08</MoveSpeed>
 				</statOffsets>
 			</li>
     </stages>

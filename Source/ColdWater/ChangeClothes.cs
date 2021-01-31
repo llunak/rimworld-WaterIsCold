@@ -1,6 +1,5 @@
 ﻿using RimWorld;
 using Verse;
-using UnityEngine;
 using HarmonyLib;
 
 namespace WaterIsCold.WetHediff
@@ -11,18 +10,14 @@ namespace WaterIsCold.WetHediff
         public static void Postfix(Apparel apparel, Pawn ___pawn)
         {
             //Log.Message(___pawn.Name + " changed clothes");
-            if (___pawn.Dead)
-            {
-                return;
-            }
             Hediff firstHediffOfDef = ___pawn.health.hediffSet.GetFirstHediffOfDef(DefOf_WaterIsCold.WetCold, false);
             if (firstHediffOfDef == null)
             {
                 return;
             }
-            if (apparel.def.apparel.layers.Contains(ApparelLayerDefOf.OnSkin) || apparel.def.apparel.layers.Contains(ApparelLayerDefOf.Middle))
+            if (apparel.def.apparel.layers.Contains(ApparelLayerDefOf.OnSkin))
             {
-                firstHediffOfDef.Severity = Mathf.Max(firstHediffOfDef.Severity * .5f, .25f);
+                firstHediffOfDef.Severity *= .5f;
                 if (___pawn.needs.mood != null)
                 {
                     ___pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(ThoughtDef.Named("SoakingWet"));

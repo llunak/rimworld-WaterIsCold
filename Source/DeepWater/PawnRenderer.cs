@@ -4,7 +4,7 @@ using Verse;
 using HarmonyLib;
 using UnityEngine;
 
-namespace WaterIsCold.Swimming
+namespace WaterIsCold
 {
     [HarmonyPatch]
     public class RenderSwimming
