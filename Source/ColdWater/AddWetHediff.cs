@@ -14,27 +14,25 @@ namespace WaterIsCold
         [HarmonyPatch(typeof(MemoryThoughtHandler), "TryGainMemoryFast")]
         public static bool Prefix(ThoughtDef mem, Pawn ___pawn)
         {
-            bool allowSoakingWet = !ModSettings_WaterIsCold.disableWetAlways;
             if (mem != ThoughtDef.Named("SoakingWet"))
             {
                 if (ModLister.GetActiveModWithIdentifier("ReGrowth.BOTR.Core") == null || (mem != ThoughtDef.Named("RG_Wet") && mem != ThoughtDef.Named("RG_CompletelyWet")))
                 {
-                    return allowSoakingWet;
+                    return true;
                 }
             }
-            if (allowSoakingWet && ___pawn.Map.mapTemperature.OutdoorTemp > 21)
-            {
-                if (ModSettings_WaterIsCold.disableWetWarm || (___pawn.jobs.curJob != null && ___pawn.jobs.curJob.def == DefOf_WaterIsCold.WIC_Swim))
-                {
-                    allowSoakingWet = false;
-                }
-            } 
             if (ModSettings_WaterIsCold.coldWater)
             {
                 AddHediff(___pawn);
             }
-            return allowSoakingWet;
-
+            if (ModLister.GetActiveModWithIdentifier("VanillaExpanded.VanillaTraitsExpanded") != null)
+            {
+                if (___pawn.story.traits.HasTrait(DefDatabase<TraitDef>.GetNamedSilentFail("VTE_ChildOfSea"))) return true;
+            }
+            if (ModSettings_WaterIsCold.disableWetAlways) return false;
+            if (ModSettings_WaterIsCold.disableWetNever) return true;
+            if (ModSettings_WaterIsCold.disableWetWarm) return ___pawn.Map.mapTemperature.OutdoorTemp <= 26;
+            return ___pawn.jobs.curJob?.def != DefOf_WaterIsCold.WIC_Swim;
         }
 
         public static void AddHediff(Pawn pawn)
