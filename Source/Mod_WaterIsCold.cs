@@ -24,7 +24,7 @@ namespace WaterIsCold
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect rect = new Rect(100f, 50f, inRect.width * .8f, inRect.height);
+            Rect rect = new Rect(10f, 50f, inRect.width * .6f, inRect.height);
             listingStandard.Begin(rect);
             listingStandard.CheckboxLabeled("Water is cold: ", ref ModSettings_WaterIsCold.coldWater);
             listingStandard.CheckboxLabeled("Water is deep: ", ref ModSettings_WaterIsCold.deepWater);
@@ -36,16 +36,25 @@ namespace WaterIsCold
             {
                 ModSettings_WaterIsCold.disableWetAlways = true;
                 ModSettings_WaterIsCold.disableWetWarm = false;
+                ModSettings_WaterIsCold.disableWetNever = false;
             }
             if (listingStandard.RadioButton_NewTemp("Disable soaking wet when warm (above 26C/78.8F):", ModSettings_WaterIsCold.disableWetWarm))
             {
                 ModSettings_WaterIsCold.disableWetAlways = false;
                 ModSettings_WaterIsCold.disableWetWarm = true;
+                ModSettings_WaterIsCold.disableWetNever = false;
             }
-            if (listingStandard.RadioButton_NewTemp("Disable soaking wet only when swimming:", !ModSettings_WaterIsCold.disableWetAlways && !ModSettings_WaterIsCold.disableWetWarm) )
+            if (listingStandard.RadioButton_NewTemp("Disable soaking wet when swimming:", !ModSettings_WaterIsCold.disableWetAlways && !ModSettings_WaterIsCold.disableWetWarm && !ModSettings_WaterIsCold.disableWetNever))
             {
                 ModSettings_WaterIsCold.disableWetAlways = false;
                 ModSettings_WaterIsCold.disableWetWarm = false;
+                ModSettings_WaterIsCold.disableWetNever = false;
+            }
+            if (listingStandard.RadioButton_NewTemp("Swimming makes me angry:", ModSettings_WaterIsCold.disableWetNever))
+            {
+                ModSettings_WaterIsCold.disableWetAlways = false;
+                ModSettings_WaterIsCold.disableWetWarm = false;
+                ModSettings_WaterIsCold.disableWetNever = true;
             }
             listingStandard.GapLine();
             string wetInsulationLabel = "Minimum insulation value of clothing when wet (%):";
