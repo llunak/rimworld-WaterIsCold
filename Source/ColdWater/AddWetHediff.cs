@@ -1,5 +1,4 @@
-﻿using System;
-using RimWorld;
+﻿using RimWorld;
 using Verse;
 using UnityEngine;
 using HarmonyLib;
@@ -16,7 +15,7 @@ namespace WaterIsCold
         {
             if (mem != ThoughtDef.Named("SoakingWet"))
             {
-                if (ModLister.GetActiveModWithIdentifier("ReGrowth.BOTR.Core") == null || (mem != ThoughtDef.Named("RG_Wet") && mem != ThoughtDef.Named("RG_CompletelyWet")))
+                if (ModLister.GetActiveModWithIdentifier("ReGrowth.BOTR.Core") == null || (mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_Wet") && mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_ExtremelyWet")))
                 {
                     return true;
                 }

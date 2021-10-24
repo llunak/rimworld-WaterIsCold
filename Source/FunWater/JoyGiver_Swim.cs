@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using RimWorld;
 using Verse;
 using Verse.AI;
-using UnityEngine;
 
 namespace WaterIsCold
 {
@@ -16,9 +14,9 @@ namespace WaterIsCold
 				return 0f;
 			}
 			float num = 0;
-			if (pawn.Map.mapTemperature.OutdoorTemp > 26f)
+			if (pawn.Map.mapTemperature.OutdoorTemp >= ModSettings_WaterIsCold.swimTemp)
 			{
-				num = Math.Max(0, pawn.Map.mapTemperature.OutdoorTemp) * Math.Max(0,(.75f - pawn.needs.joy.CurLevel));
+				num = Math.Max(0, pawn.Map.mapTemperature.OutdoorTemp) * Math.Max(0,(.8f - pawn.needs.joy.CurLevel));
 			}
 			return base.GetChance(pawn) * num;
 		}

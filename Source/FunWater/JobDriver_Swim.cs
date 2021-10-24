@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RimWorld;
+using UnityEngine;
 using Verse;
 using Verse.AI;
 
@@ -19,7 +20,7 @@ namespace WaterIsCold
         protected override IEnumerable<Toil> MakeNewToils()
         {
 			this.FailOn(() => !JoyUtility.EnjoyableOutsideNow(pawn.Map, null));
-			this.FailOn(() => pawn.Map.mapTemperature.OutdoorTemp < 21f);
+			this.FailOn(() => pawn.Map.mapTemperature.OutdoorTemp < ModSettings_WaterIsCold.swimTemp - 5f);
 			yield return Toils_Goto.GotoCell(TargetIndex.A, PathEndMode.OnCell);
 			Action swimTick = delegate ()
 			{
@@ -53,26 +54,28 @@ namespace WaterIsCold
 			yield break;
 		}
 
+
+
         public override string GetReport()
 		{
 			TerrainDef terrain = this.pawn.Position.GetTerrain(this.pawn.Map);
 			if (!terrain.IsWater)
             {
-				return "Going for a swim".Translate();
+				return "WIC.goingswim".Translate();
             }
 			if(terrain == TerrainDefOf.WaterShallow || terrain == TerrainDefOf.WaterMovingShallow || terrain == TerrainDefOf.WaterOceanShallow)
 			{
-				return "Wading".Translate();
+				return "WIC.wading".Translate();
             }
 			if (terrain == TerrainDefOf.WaterOceanDeep)
             {
-				return "Body surfing".Translate();
+				return "WIC.bodysurfing".Translate();
             }
 			if (terrain == TerrainDefOf.WaterDeep)
             {
-				return "Treading water".Translate();
+				return "WIC.treading".Translate();
             }
-			return "Swimming".Translate();
+			return "WIC.swimming".Translate();
 		}
 	}
 }

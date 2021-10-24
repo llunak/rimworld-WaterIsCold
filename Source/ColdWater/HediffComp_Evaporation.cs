@@ -26,7 +26,7 @@ namespace WaterIsCold
 			}
 		}
 
-        protected override float SeverityChangePerDay()
+        public override float SeverityChangePerDay()
         {
 			float heatFactor = 1f + (this.Pawn.AmbientTemperature - 21)/50;
             return base.SeverityChangePerDay() * heatFactor;

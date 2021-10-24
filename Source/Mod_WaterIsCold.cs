@@ -14,7 +14,7 @@ namespace WaterIsCold
         public Mod_WaterIsCold(ModContentPack content) : base(content)
         {
             GetSettings<ModSettings_WaterIsCold>();
-            Harmony harmony = new Harmony("rimworld.varietymattersfashion");
+            Harmony harmony = new Harmony("rimworld.cozarkian.wateriscold");
             harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
         public override string SettingsCategory()
@@ -24,7 +24,7 @@ namespace WaterIsCold
 
         public override void DoSettingsWindowContents(Rect inRect)
         {
-            Rect rect = new Rect(10f, 50f, inRect.width * .6f, inRect.height);
+            Rect rect = new Rect(10f, 50f, inRect.width * .75f, inRect.height);
             listingStandard.Begin(rect);
             listingStandard.CheckboxLabeled("Water is cold: ", ref ModSettings_WaterIsCold.coldWater);
             listingStandard.CheckboxLabeled("Water is deep: ", ref ModSettings_WaterIsCold.deepWater);
@@ -32,25 +32,25 @@ namespace WaterIsCold
             listingStandard.GapLine();
             //listingStandard.CheckboxLabeled("Always disable soaking wet thought:", ref ModSettings_WaterIsCold.disableWetAlways);
             //listingStandard.CheckboxLabeled("Disable soaking wet thought when warm (above 21C/70F):", ref ModSettings_WaterIsCold.disableWetWarm);
-            if (listingStandard.RadioButton_NewTemp("Always disable soaking wet thought:", ModSettings_WaterIsCold.disableWetAlways))
+            if (listingStandard.RadioButton("Always disable soaking wet thought:", ModSettings_WaterIsCold.disableWetAlways))
             {
                 ModSettings_WaterIsCold.disableWetAlways = true;
                 ModSettings_WaterIsCold.disableWetWarm = false;
                 ModSettings_WaterIsCold.disableWetNever = false;
             }
-            if (listingStandard.RadioButton_NewTemp("Disable soaking wet when warm (above 26C/78.8F):", ModSettings_WaterIsCold.disableWetWarm))
+            if (listingStandard.RadioButton("Disable soaking wet when warm (above 26C/78.8F):", ModSettings_WaterIsCold.disableWetWarm))
             {
                 ModSettings_WaterIsCold.disableWetAlways = false;
                 ModSettings_WaterIsCold.disableWetWarm = true;
                 ModSettings_WaterIsCold.disableWetNever = false;
             }
-            if (listingStandard.RadioButton_NewTemp("Disable soaking wet when swimming:", !ModSettings_WaterIsCold.disableWetAlways && !ModSettings_WaterIsCold.disableWetWarm && !ModSettings_WaterIsCold.disableWetNever))
+            if (listingStandard.RadioButton("Disable soaking wet when swimming:", !ModSettings_WaterIsCold.disableWetAlways && !ModSettings_WaterIsCold.disableWetWarm && !ModSettings_WaterIsCold.disableWetNever))
             {
                 ModSettings_WaterIsCold.disableWetAlways = false;
                 ModSettings_WaterIsCold.disableWetWarm = false;
                 ModSettings_WaterIsCold.disableWetNever = false;
             }
-            if (listingStandard.RadioButton_NewTemp("Swimming makes me angry:", ModSettings_WaterIsCold.disableWetNever))
+            if (listingStandard.RadioButton("Swimming makes me angry:", ModSettings_WaterIsCold.disableWetNever))
             {
                 ModSettings_WaterIsCold.disableWetAlways = false;
                 ModSettings_WaterIsCold.disableWetWarm = false;
@@ -63,6 +63,9 @@ namespace WaterIsCold
             string swimSearchArea = "Max swimming distance (default = 80; max = 250):";
             string swimSearchBuffer = ModSettings_WaterIsCold.swimSearchArea.ToString();
             LabeledIntEntry(listingStandard.GetRect(24f), swimSearchArea, ref ModSettings_WaterIsCold.swimSearchArea, ref swimSearchBuffer, 5, 20, 0, 250);
+            string swimTemp = "Min outdoor temp for swimming (default = 26 = 26C/78.8F):";
+            string swimTempBuffer = ModSettings_WaterIsCold.swimTemp.ToString();
+            LabeledIntEntry(listingStandard.GetRect(24f), swimTemp, ref ModSettings_WaterIsCold.swimTemp, ref swimTempBuffer, 1, 5, 0, 100);
             listingStandard.End();
             base.DoSettingsWindowContents(inRect);
         }
