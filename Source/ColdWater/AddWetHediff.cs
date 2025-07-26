@@ -49,13 +49,18 @@ namespace WaterIsCold
             if( ModSettings_WaterIsCold.soakingWetIfCold
                 && cellTemperature < ___pawn.GetStatValue(StatDefOf.ComfyTemperatureMin))
             {
-                return true;
+                // Only if not fully vacuum resistant.
+                if( ___pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) < 1f )
+                    return true;
             }
             return result;
         }
 
         public static void AddHediff(Pawn pawn)
         {
+            if( pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) >= 1f )
+                return;
+
             HediffDef def = DefOf_WaterIsCold.WetCold;
             Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(def, false);
             if (firstHediffOfDef == null)
