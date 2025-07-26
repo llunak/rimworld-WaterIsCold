@@ -28,8 +28,8 @@ namespace WaterIsCold
 
         public override float SeverityChangePerDay()
         {
-			float heatFactor = 1f + (this.Pawn.AmbientTemperature - 21)/50;
-            return base.SeverityChangePerDay() * heatFactor;
+            float heatFactor = 1f + (this.Pawn.AmbientTemperature - 21)/50;
+            return base.SeverityChangePerDay() * Mathf.Max(heatFactor, 0f);
         }
     }
 }
