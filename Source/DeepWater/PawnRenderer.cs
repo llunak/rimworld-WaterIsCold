@@ -15,7 +15,7 @@ namespace WaterIsCold
             if (ModSettings_WaterIsCold.deepWater && renderBody)
             {
                 TerrainDef terrain = ___pawn.Position.GetTerrain(___pawn.Map);
-                if (terrain == TerrainDefOf.WaterMovingChestDeep || terrain == TerrainDefOf.WaterOceanDeep || terrain == TerrainDefOf.WaterDeep)
+                if (terrain.IsWater && !Utility.IsShallowWater(terrain))
                 {
                     renderBody = false;
                 }

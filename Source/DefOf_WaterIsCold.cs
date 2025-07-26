@@ -8,6 +8,7 @@ namespace WaterIsCold
     {
         public static HediffDef WetCold;
         public static JobDef WIC_Swim;
+        public static TerrainAffordanceDef ShallowWater;
 
         static DefOf_WaterIsCold()
         {

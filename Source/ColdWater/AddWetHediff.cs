@@ -49,7 +49,7 @@ namespace WaterIsCold
             TerrainDef terrain = pawn.Position.GetTerrain(pawn.Map);
             if (terrain.IsWater)
             {
-                if (terrain == TerrainDefOf.WaterDeep || terrain == TerrainDefOf.WaterOceanDeep || terrain == TerrainDefOf.WaterMovingChestDeep)
+                if (!Utility.IsShallowWater(terrain))
                 {
                     firstHediffOfDef.Severity = 1f;
                 }
