@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using RimWorld;
 using Verse;
 using HarmonyLib;
