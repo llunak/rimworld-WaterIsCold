@@ -19,7 +19,7 @@ namespace WaterIsCold
         }
         public override string SettingsCategory()
         {
-            return "Water Is Cold";
+            return "Water Is Cold (fork)";
         }
 
         public override void DoSettingsWindowContents(Rect inRect)

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputPath>..\Assemblies</OutputPath>
     <TargetFramework>net472</TargetFramework>
-    <AssemblyTitle>Water Is Cold</AssemblyTitle>
+    <AssemblyTitle>Water Is Cold (fork)</AssemblyTitle>
     <AssemblyVersion>2025.0726.1</AssemblyVersion>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>

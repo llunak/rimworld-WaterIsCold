@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
-	<name>Water is Cold</name>
-	<author>Cozarkian</author>
+	<name>Water Is Cold (fork)</name>
+	<author>llunak</author>
   <supportedVersions>
 		<li>1.6</li>
   </supportedVersions>
@@ -14,7 +14,7 @@
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
   </modDependencies>
-  <description>Makes water cold, deep, and fun.
+  <description>Makes water cold, deep, and possibly fun.
+Fork of 'Water Is Cold' by Cozarkian.
   </description>
 </ModMetaData>
-
