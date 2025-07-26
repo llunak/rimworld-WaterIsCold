@@ -7,7 +7,6 @@ namespace WaterIsCold
     {
         public static bool coldWater = true;
         public static bool deepWater = false;
-        public static bool funWater = true;
         public static bool disableWetAlways = false;
         public static bool disableWetWarm = false;
         public static bool disableWetNever = false;
@@ -20,7 +19,6 @@ namespace WaterIsCold
         {
             Scribe_Values.Look(ref coldWater, "coldWater", true);
             Scribe_Values.Look(ref deepWater, "deepWater", false);
-            Scribe_Values.Look(ref funWater, "funWater", true);
             Scribe_Values.Look(ref disableWetAlways, "disableWetAlways", false);
             Scribe_Values.Look(ref disableWetWarm, "disableWetWarm", false);
             Scribe_Values.Look(ref disableWetNever, "disableWetNever", false);

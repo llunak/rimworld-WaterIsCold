@@ -28,7 +28,6 @@ namespace WaterIsCold
             listingStandard.Begin(rect);
             listingStandard.CheckboxLabeled("Water is cold: ", ref ModSettings_WaterIsCold.coldWater);
             listingStandard.CheckboxLabeled("Water is deep: ", ref ModSettings_WaterIsCold.deepWater);
-            listingStandard.CheckboxLabeled("Water is fun: ", ref ModSettings_WaterIsCold.funWater);
             listingStandard.GapLine();
             //listingStandard.CheckboxLabeled("Always disable soaking wet thought:", ref ModSettings_WaterIsCold.disableWetAlways);
             //listingStandard.CheckboxLabeled("Disable soaking wet thought when warm (above 21C/70F):", ref ModSettings_WaterIsCold.disableWetWarm);

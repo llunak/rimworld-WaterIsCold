@@ -3,10 +3,6 @@
 <loadFolders>
 	<v1.6>
 		<li>/</li>
-		<li IfModActive="pyrce.swimming.modkit">ModPatches\SwimmingKit</li>
-		<li IfModActive="sarg.alphabiomes">ModPatches\AlphaBiomes</li>
-		<li IfModActive="BiomesTeam.BiomesCore">ModPatches\BiomesCore</li>
-		<li IfModActive="ReGrowth.BOTR.Core">ModPatches\Regrowth</li>
 	</v1.6>
 </loadFolders>
 
