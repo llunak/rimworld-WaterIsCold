@@ -11,6 +11,7 @@ namespace WaterIsCold
         [HarmonyPatch(typeof(MemoryThoughtHandler), "TryGainMemoryFast")]
         public static bool Prefix(ThoughtDef mem, Pawn ___pawn)
         {
+            // TODO This presumably does not work anyway, since vanilla now disables the thought during swimming.
             if (mem != ThoughtDefOf.SoakingWet)
             {
                 if (ModLister.GetActiveModWithIdentifier("ReGrowth.BOTR.Core") == null || (mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_Wet") && mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_ExtremelyWet")))
@@ -29,7 +30,7 @@ namespace WaterIsCold
             if (ModSettings_WaterIsCold.disableWetAlways) return false;
             if (ModSettings_WaterIsCold.disableWetNever) return true;
             if (ModSettings_WaterIsCold.disableWetWarm) return ___pawn.Map.mapTemperature.OutdoorTemp <= 26;
-            return ___pawn.jobs.curJob?.def != DefOf_WaterIsCold.WIC_Swim;
+            return !___pawn.Swimming;
         }
 
         public static void AddHediff(Pawn pawn)
