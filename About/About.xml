@@ -14,7 +14,8 @@
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
   </modDependencies>
-  <description>Makes water cold. Useful if it's hot, annoying and possibly dangerous if it's cold.
+  <description>Makes water cold. Useful if the weather is hot, annoying and possibly dangerous if the weather is cold.
+
 Fork of 'Water Is Cold' by Cozarkian.
   </description>
 </ModMetaData>
