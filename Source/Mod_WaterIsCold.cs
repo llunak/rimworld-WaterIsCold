@@ -59,12 +59,6 @@ namespace WaterIsCold
             string wetInsulationLabel = "Minimum insulation value of clothing when wet (%):";
             string wetInsulationBuffer = ModSettings_WaterIsCold.wetInsFactor.ToString();
             LabeledIntEntry(listingStandard.GetRect(24f), wetInsulationLabel, ref ModSettings_WaterIsCold.wetInsFactor, ref wetInsulationBuffer, 1, 10, 0, 100);
-            string swimSearchArea = "Max swimming distance (default = 80; max = 250):";
-            string swimSearchBuffer = ModSettings_WaterIsCold.swimSearchArea.ToString();
-            LabeledIntEntry(listingStandard.GetRect(24f), swimSearchArea, ref ModSettings_WaterIsCold.swimSearchArea, ref swimSearchBuffer, 5, 20, 0, 250);
-            string swimTemp = "Min outdoor temp for swimming (default = 26 = 26C/78.8F):";
-            string swimTempBuffer = ModSettings_WaterIsCold.swimTemp.ToString();
-            LabeledIntEntry(listingStandard.GetRect(24f), swimTemp, ref ModSettings_WaterIsCold.swimTemp, ref swimTempBuffer, 1, 5, 0, 100);
             listingStandard.End();
             base.DoSettingsWindowContents(inRect);
         }

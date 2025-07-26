@@ -11,8 +11,6 @@ namespace WaterIsCold
         public static bool disableWetWarm = false;
         public static bool disableWetNever = false;
         public static int wetInsFactor = 0;
-        public static int swimSearchArea = 100;
-        public static int swimTemp = 26;
         //public static float warmWeather = 26f;
 
         public override void ExposeData()
@@ -23,8 +21,6 @@ namespace WaterIsCold
             Scribe_Values.Look(ref disableWetWarm, "disableWetWarm", false);
             Scribe_Values.Look(ref disableWetNever, "disableWetNever", false);
             Scribe_Values.Look(ref wetInsFactor, "wetInsFactor", 0);
-            Scribe_Values.Look(ref swimSearchArea, "swimSearchArea", 100);
-            Scribe_Values.Look(ref swimSearchArea, "swimTemp", 26);
             base.ExposeData();
         }
     }
