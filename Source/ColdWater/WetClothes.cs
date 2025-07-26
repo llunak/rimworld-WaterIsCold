@@ -9,7 +9,7 @@ namespace WaterIsCold
     [HarmonyPatch]
     public class WetClothes
     {
-        [HarmonyPatch(typeof(StatPart_ApparelStatOffset), "TransformValue")]
+        [HarmonyPatch(typeof(StatPart_GearStatOffset), "TransformValue")]
         [HarmonyPrefix]
         public static bool IgnoreInsulationWhenWet(StatRequest req, ref float val, StatDef ___apparelStat, bool ___subtract)
         {
@@ -48,9 +48,9 @@ namespace WaterIsCold
             return true;
         }
 
-        [HarmonyPatch(typeof(StatPart_ApparelStatOffset), "ExplanationPart")]
+        [HarmonyPatch(typeof(StatPart_GearStatOffset), "ExplanationPart")]
         [HarmonyPrefix]
-        public static bool IgnoreInsulationWhenWet(StatPart_ApparelStatOffset __instance, StatRequest req, ref string __result, StatDef ___apparelStat, bool ___subtract)
+        public static bool IgnoreInsulationWhenWet(StatPart_GearStatOffset __instance, StatRequest req, ref string __result, StatDef ___apparelStat, bool ___subtract)
         {
             if (___apparelStat != StatDefOf.Insulation_Cold || !___subtract)
             {
@@ -104,7 +104,7 @@ namespace WaterIsCold
             return false;
         }
 
-        private static string InfoTextLineFrom(StatPart_ApparelStatOffset instance, Thing gear, float heddifSeverity, StatDef apparelStat)
+        private static string InfoTextLineFrom(StatPart_GearStatOffset instance, Thing gear, float heddifSeverity, StatDef apparelStat)
         {
             float num = gear.GetStatValue(apparelStat, true);
             num += StatWorker.StatOffsetFromGear(gear, apparelStat);
