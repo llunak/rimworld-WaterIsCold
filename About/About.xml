@@ -14,7 +14,7 @@
 			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
 		</li>
   </modDependencies>
-  <description>Makes water cold.
+  <description>Makes water cold. Useful if it's hot, annoying and possibly dangerous if it's cold.
 Fork of 'Water Is Cold' by Cozarkian.
   </description>
 </ModMetaData>

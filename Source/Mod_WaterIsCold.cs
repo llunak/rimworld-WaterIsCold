@@ -28,32 +28,8 @@ namespace WaterIsCold
             listingStandard.Begin(rect);
             listingStandard.CheckboxLabeled("Water is cold: ", ref ModSettings_WaterIsCold.coldWater);
             listingStandard.GapLine();
-            //listingStandard.CheckboxLabeled("Always disable soaking wet thought:", ref ModSettings_WaterIsCold.disableWetAlways);
-            //listingStandard.CheckboxLabeled("Disable soaking wet thought when warm (above 21C/70F):", ref ModSettings_WaterIsCold.disableWetWarm);
-            if (listingStandard.RadioButton("Always disable soaking wet thought:", ModSettings_WaterIsCold.disableWetAlways))
-            {
-                ModSettings_WaterIsCold.disableWetAlways = true;
-                ModSettings_WaterIsCold.disableWetWarm = false;
-                ModSettings_WaterIsCold.disableWetNever = false;
-            }
-            if (listingStandard.RadioButton("Disable soaking wet when warm (above 26C/78.8F):", ModSettings_WaterIsCold.disableWetWarm))
-            {
-                ModSettings_WaterIsCold.disableWetAlways = false;
-                ModSettings_WaterIsCold.disableWetWarm = true;
-                ModSettings_WaterIsCold.disableWetNever = false;
-            }
-            if (listingStandard.RadioButton("Disable soaking wet when swimming:", !ModSettings_WaterIsCold.disableWetAlways && !ModSettings_WaterIsCold.disableWetWarm && !ModSettings_WaterIsCold.disableWetNever))
-            {
-                ModSettings_WaterIsCold.disableWetAlways = false;
-                ModSettings_WaterIsCold.disableWetWarm = false;
-                ModSettings_WaterIsCold.disableWetNever = false;
-            }
-            if (listingStandard.RadioButton("Swimming makes me angry:", ModSettings_WaterIsCold.disableWetNever))
-            {
-                ModSettings_WaterIsCold.disableWetAlways = false;
-                ModSettings_WaterIsCold.disableWetWarm = false;
-                ModSettings_WaterIsCold.disableWetNever = true;
-            }
+            listingStandard.CheckboxLabeled("Force soaking wet thought if water is cold: ", ref ModSettings_WaterIsCold.soakingWetIfCold);
+            listingStandard.CheckboxLabeled("No soaking wet thought in shallow water if warm: ", ref ModSettings_WaterIsCold.noSoakingWetIfShallowWarm);
             listingStandard.GapLine();
             string wetInsulationLabel = "Minimum insulation value of clothing when wet (%):";
             string wetInsulationBuffer = ModSettings_WaterIsCold.wetInsFactor.ToString();
