@@ -8,12 +8,10 @@ namespace WaterIsCold
     [HarmonyPatch]
     public class AddWetHediff
     {
-        //public static List<ThoughtDef> wetThoughts = new List<ThoughtDef>() {ThoughtDef.Named("SoakingWet")};
-
         [HarmonyPatch(typeof(MemoryThoughtHandler), "TryGainMemoryFast")]
         public static bool Prefix(ThoughtDef mem, Pawn ___pawn)
         {
-            if (mem != ThoughtDef.Named("SoakingWet"))
+            if (mem != ThoughtDefOf.SoakingWet)
             {
                 if (ModLister.GetActiveModWithIdentifier("ReGrowth.BOTR.Core") == null || (mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_Wet") && mem != DefDatabase<ThoughtDef>.GetNamedSilentFail("RG_ExtremelyWet")))
                 {
