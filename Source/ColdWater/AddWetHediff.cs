@@ -68,10 +68,10 @@ namespace WaterIsCold
                 pawn.health.AddHediff(HediffMaker.MakeHediff(def, pawn, null), null, null, null);
                 firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(def, false);
             }
-            float curSeverity = firstHediffOfDef.Severity;
 
             //Determine level from traversing through water
             TerrainDef terrain = pawn.Position.GetTerrain(pawn.Map);
+            float waterSeverity = 0;
             if (terrain.IsWater)
             {
                 // Use the immune duration, so that stopping swimming and walking out of water still counts as swimming.
@@ -80,17 +80,12 @@ namespace WaterIsCold
                     // The severity range for 'wet' is [0.26,0.51). Do not use the lowest value,
                     // so that the stage stays on for a while (until it's refreshed), but still
                     // use low so that it goes away quickly to just 'damp'.
-                    firstHediffOfDef.Severity = 0.32f;
+                    waterSeverity = 0.32f;
                 }
-                else if (!Utility.IsShallowWater(terrain))
-                {
-                    firstHediffOfDef.Severity = 1f;
-                }
+                else if (Utility.IsShallowWater(terrain))
+                    waterSeverity = 0.5f;
                 else
-                {
-                    firstHediffOfDef.Severity = 0.5f;
-                }
-                return;
+                    waterSeverity = 1f;
             }
             //Apply rain
             float rainRate = pawn.Map.weatherManager.RainRate;
@@ -120,8 +115,9 @@ namespace WaterIsCold
                     }
                 }
                 layers = 1.25f - Mathf.Max(.25f, layers);
-                curSeverity += rainRate * layers / 10;
-                firstHediffOfDef.Severity = Mathf.Min(curSeverity, rainRate * layers);
+                float rainSeverity = firstHediffOfDef.Severity + rainRate * layers / 10;
+                rainSeverity = Mathf.Min(rainSeverity, rainRate * layers);
+                firstHediffOfDef.Severity = Mathf.Max( waterSeverity, rainSeverity, firstHediffOfDef.Severity );
             }
         }
     }
