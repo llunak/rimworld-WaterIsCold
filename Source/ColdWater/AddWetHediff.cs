@@ -85,8 +85,11 @@ namespace WaterIsCold
                 && cellTemperature < pawn.GetStatValue(StatDefOf.ComfyTemperatureMin))
             {
                 // Only if not fully vacuum resistant.
-                if( pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) < 1f )
+                if( StatDefOf.VacuumResistance != null
+                    && pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) < 1f )
+                {
                     return true; // Gain the thought.
+                }
             }
             return lastCanGainThought; // We do not change whether the thought is gained.
         }
@@ -94,8 +97,11 @@ namespace WaterIsCold
 
         public static void AddHediff(Pawn pawn)
         {
-            if( pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) >= 1f )
+            if( StatDefOf.VacuumResistance != null
+                && pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) >= 1f )
+            {
                 return;
+            }
 
             HediffDef def = DefOf_WaterIsCold.WetCold;
             Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(def, false);
