@@ -22,7 +22,7 @@ namespace WaterIsCold
         static public void CanDrawNow(ref PawnDrawParms parms)
         {
             // Is it the problematic case?
-            if (!parms.flags.FlagSet(PawnRenderFlags.Clothes) || parms.flags.FlagSet(PawnRenderFlags.Headgear))
+            if (!parms.flags.FlagSet(PawnRenderFlags.Clothes) && parms.flags.FlagSet(PawnRenderFlags.Headgear))
             {
                 if( PawnRenderer_Patch.RenderAsInDeepWater( parms.pawn ))
                     parms.flags |= PawnRenderFlags.Clothes;
@@ -34,7 +34,7 @@ namespace WaterIsCold
         static public void HeadgearVisible(ref PawnDrawParms parms)
         {
             // Is it the problematic case?
-            if (!parms.flags.FlagSet(PawnRenderFlags.Clothes) || parms.flags.FlagSet(PawnRenderFlags.Headgear))
+            if (!parms.flags.FlagSet(PawnRenderFlags.Clothes) && parms.flags.FlagSet(PawnRenderFlags.Headgear))
             {
                 if( PawnRenderer_Patch.RenderAsInDeepWater( parms.pawn ))
                     parms.flags |= PawnRenderFlags.Clothes;
