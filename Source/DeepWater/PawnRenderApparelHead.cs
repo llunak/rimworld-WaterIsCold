@@ -40,5 +40,19 @@ namespace WaterIsCold
                     parms.flags |= PawnRenderFlags.Clothes;
             }
         }
+
+        // Hide heargear if swimming and configured so. Do this late (low priority) to override any mods
+        // that possibly control drawing of hats (Hats Display Selection).
+        [HarmonyPostfix]
+        [HarmonyPatch(nameof(CanDrawNow))]
+        [HarmonyPriority(Priority.Low)]
+        public static bool CanDrawNow(bool result, PawnRenderNode n, PawnDrawParms parms)
+        {
+            if( !result )
+                return result;
+            if( parms.pawn.Swimming )
+                return false;
+            return result;
+        }
     }
 }

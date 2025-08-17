@@ -28,6 +28,7 @@ namespace WaterIsCold
             listingStandard.Begin(rect);
             listingStandard.CheckboxLabeled("Water is cold: ", ref ModSettings_WaterIsCold.coldWater);
             listingStandard.CheckboxLabeled("Water is deep: ", ref ModSettings_WaterIsCold.deepWater);
+            listingStandard.CheckboxLabeled("No headgear if swimming: ", ref ModSettings_WaterIsCold.noHeadgearIfSwimming);
             listingStandard.GapLine();
             listingStandard.CheckboxLabeled("Force soaking wet thought if water is cold: ", ref ModSettings_WaterIsCold.soakingWetIfCold);
             listingStandard.CheckboxLabeled("No soaking wet thought in shallow water if warm: ", ref ModSettings_WaterIsCold.noSoakingWetIfShallowWarm);
