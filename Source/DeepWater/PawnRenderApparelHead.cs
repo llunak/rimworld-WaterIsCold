@@ -50,7 +50,7 @@ namespace WaterIsCold
         {
             if( !result )
                 return result;
-            if( parms.pawn.Swimming )
+            if( parms.pawn.Swimming && !parms.Portrait )
                 return false;
             return result;
         }
