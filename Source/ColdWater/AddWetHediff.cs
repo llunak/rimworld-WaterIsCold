@@ -97,11 +97,11 @@ namespace WaterIsCold
 
         public static void AddHediff(Pawn pawn)
         {
-            if( StatDefOf.VacuumResistance != null
-                && pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5) >= 1f )
-            {
+            float vacuumResistance = 0;
+            if( StatDefOf.VacuumResistance != null )
+                vacuumResistance = pawn.GetStatValue(StatDefOf.VacuumResistance, applyPostProcess: true, 5);
+            if( vacuumResistance >= 1f )
                 return;
-            }
 
             HediffDef def = DefOf_WaterIsCold.WetCold;
             Hediff firstHediffOfDef = pawn.health.hediffSet.GetFirstHediffOfDef(def, false);
@@ -129,8 +129,10 @@ namespace WaterIsCold
                 else
                     waterSeverity = 1f;
             }
+            waterSeverity *= ( 1 - vacuumResistance );
             //Apply rain
             float rainRate = pawn.Map.weatherManager.RainRate;
+            rainRate *= ( 1 - vacuumResistance );
             if (pawn.apparel != null)
             {
                 bool outer = false;
